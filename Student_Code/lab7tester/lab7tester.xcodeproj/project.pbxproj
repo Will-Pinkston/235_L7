@@ -10,6 +10,7 @@
 		1B1501B31D95CC47008D62F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501B21D95CC47008D62F1 /* main.cpp */; };
 		1B1501BD1D95CC5A008D62F1 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501B91D95CC5A008D62F1 /* Factory.cpp */; };
 		1B1501C01D95CD3C008D62F1 /* GPA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501BE1D95CD3C008D62F1 /* GPA.cpp */; };
+		1B1501C31D95DC76008D62F1 /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501C11D95DC76008D62F1 /* Student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		1B1501BC1D95CC5A008D62F1 /* StudentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudentInterface.h; path = lab7tester/StudentInterface.h; sourceTree = "<group>"; };
 		1B1501BE1D95CD3C008D62F1 /* GPA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GPA.cpp; path = lab7tester/GPA.cpp; sourceTree = "<group>"; };
 		1B1501BF1D95CD3C008D62F1 /* GPA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GPA.hpp; path = lab7tester/GPA.hpp; sourceTree = "<group>"; };
+		1B1501C11D95DC76008D62F1 /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
+		1B1501C21D95DC76008D62F1 /* Student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Student.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +60,8 @@
 				1B1501BF1D95CD3C008D62F1 /* GPA.hpp */,
 				1B1501BE1D95CD3C008D62F1 /* GPA.cpp */,
 				1B1501BC1D95CC5A008D62F1 /* StudentInterface.h */,
+				1B1501C21D95DC76008D62F1 /* Student.hpp */,
+				1B1501C11D95DC76008D62F1 /* Student.cpp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +141,7 @@
 				1B1501C01D95CD3C008D62F1 /* GPA.cpp in Sources */,
 				1B1501BD1D95CC5A008D62F1 /* Factory.cpp in Sources */,
 				1B1501B31D95CC47008D62F1 /* main.cpp in Sources */,
+				1B1501C31D95DC76008D62F1 /* Student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

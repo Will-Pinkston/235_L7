@@ -14,6 +14,8 @@
 #include <iostream>
 
 #include "GPAInterface.h"
+#include "StudentInterface.h"
+#include "Student.hpp"
 
 class GPA : public GPAInterface {
 protected:
@@ -24,9 +26,9 @@ protected:
 public:
     GPA();
     
-    virtual map<unsigned long long int,StudentInterface*> getMap();
+    map<unsigned long long int,StudentInterface*> getMap();
     
-    virtual set<StudentInterface*,Comparator> getSet();
+    set<StudentInterface*,Comparator> getSet();
     
     /*
      * importStudents()
@@ -59,7 +61,7 @@ public:
      * Returns false if an invalid filename is given or if there is a missing entry for a
      * student, otherwise true.
      */
-    virtual bool importStudents(string mapFileName, string setFileName);
+    bool importStudents(string mapFileName, string setFileName);
     
     /*
      * importGrades()
@@ -100,7 +102,7 @@ public:
      *
      * Returns false if an invalid filename is given, otherwise true.
      */
-    virtual bool importGrades(string fileName);
+    bool importGrades(string fileName);
     
     /*
      * querySet()
@@ -126,7 +128,7 @@ public:
      * then return an empty string. The precision of the GPA will be set to two decimal places.
      * There will be a trailing new line.
      */
-    virtual string querySet(string fileName);
+    string querySet(string fileName);
     
     /*
      * queryMap()
@@ -152,12 +154,12 @@ public:
      * then return an empty string. The precision of the GPA will be set to two decimal places.
      * There will be a trailing new line.
      */
-    virtual string queryMap(string fileName);
+    string queryMap(string fileName);
     
     /*
      * Clears the students from the map and set.
      */
-    virtual void clear();
+    void clear();
     
 };
 
