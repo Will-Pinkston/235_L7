@@ -33,7 +33,7 @@ void Student::addGPA(double classGrade) {
 
 string Student::toString() {
     stringstream ss;
-    ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< m_GPA;
+    ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< fixed << setprecision(2) << m_GPA;
     return ss.str();;
 }
 

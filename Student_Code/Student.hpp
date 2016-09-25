@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <sstream>
+#include <iomanip>
 #include "StudentInterface.h"
 
 class Student : public StudentInterface {
