@@ -13,6 +13,7 @@ Student::Student(int num_id, string name, string address, string phone) {
     m_Name = name;
     m_Address = address;
     m_Phone = phone;
+    m_GPA = 0;
 }
 
 unsigned long long int Student::getID() {
@@ -49,7 +50,7 @@ string Student::toString() {
      * Returns a string representation of the student object There is no trailing new line.
      */
     stringstream ss;
-    ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< m_GPA;
+    ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< fixed << setprecision(2) << m_GPA;
     return ss.str();;
 }
 

@@ -28,6 +28,10 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
     ifstream in_fileM;
     in_fileM.open(mapFileName);
+    int fMcheck = in_fileM.peek();
+    if (fMcheck == EOF) {
+        return false;
+    }
     string fileLine;
     //input variables
     int num_id = -1;
@@ -40,9 +44,6 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     bool writeEnable = false;
     while (fRead) {
         getline(in_fileM,fileLine);
-        if (fileLine == "") {
-            return false;
-        }
         num_id = atoi(fileLine.c_str());
         int check = in_fileM.peek();
         if(check == EOF) {
@@ -93,6 +94,10 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
     ifstream in_fileS;
     in_fileS.open(setFileName);
+    int fScheck = in_fileS.peek();
+    if (fScheck == EOF) {
+        return false;
+    }
     fileLine = "";
     //input variables
     num_id = -1;
@@ -105,9 +110,6 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     writeEnable = false;
     while (fRead) {
         getline(in_fileS,fileLine);
-        if (fileLine == "") {
-            return false;
-        }
         num_id = atoi(fileLine.c_str());
         int check = in_fileS.peek();
         if(check == EOF) {
@@ -182,7 +184,7 @@ bool GPA::importGrades(string fileName) {
      */
     
     
-     /* Compute the GPA by finding the average of all the grades with a matching student ID
+    /* Compute the GPA by finding the average of all the grades with a matching student ID
      * in the Grade file. The GPA is calculated by taking a Student's total sum GPA and
      * dividing by the number of classes taken. If the given student ID has no matching
      * grades in the Grade file, the GPA is 0.00. It is not necessary to store the course
@@ -209,7 +211,7 @@ bool GPA::importGrades(string fileName) {
 
 string GPA::querySet(string fileName) {
     cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
-     return "";
+    return "";
 }
 
 string GPA::queryMap(string fileName) {

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1B1501B31D95CC47008D62F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501B21D95CC47008D62F1 /* main.cpp */; };
-		1B1501BD1D95CC5A008D62F1 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501B91D95CC5A008D62F1 /* Factory.cpp */; };
-		1B1501C01D95CD3C008D62F1 /* GPA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501BE1D95CD3C008D62F1 /* GPA.cpp */; };
-		1B1501C31D95DC76008D62F1 /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B1501C11D95DC76008D62F1 /* Student.cpp */; };
+		1BA1036F1D97A4A800BACE78 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BA1036E1D97A4A800BACE78 /* main.cpp */; };
+		1BA103721D97A4D200BACE78 /* GPA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BA103701D97A4D200BACE78 /* GPA.cpp */; };
+		1BA103741D97A4F100BACE78 /* Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BA103731D97A4F100BACE78 /* Factory.cpp */; };
+		1BA1037A1D97A5EB00BACE78 /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BA103781D97A5EB00BACE78 /* Student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,15 +27,15 @@
 
 /* Begin PBXFileReference section */
 		1B1501AF1D95CC47008D62F1 /* lab7tester */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lab7tester; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B1501B21D95CC47008D62F1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		1B1501B91D95CC5A008D62F1 /* Factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Factory.cpp; path = lab7tester/Factory.cpp; sourceTree = "<group>"; };
-		1B1501BA1D95CC5A008D62F1 /* Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Factory.h; path = lab7tester/Factory.h; sourceTree = "<group>"; };
-		1B1501BB1D95CC5A008D62F1 /* GPAInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GPAInterface.h; path = lab7tester/GPAInterface.h; sourceTree = "<group>"; };
-		1B1501BC1D95CC5A008D62F1 /* StudentInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StudentInterface.h; path = lab7tester/StudentInterface.h; sourceTree = "<group>"; };
-		1B1501BE1D95CD3C008D62F1 /* GPA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GPA.cpp; path = lab7tester/GPA.cpp; sourceTree = "<group>"; };
-		1B1501BF1D95CD3C008D62F1 /* GPA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GPA.hpp; path = lab7tester/GPA.hpp; sourceTree = "<group>"; };
-		1B1501C11D95DC76008D62F1 /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
-		1B1501C21D95DC76008D62F1 /* Student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Student.hpp; sourceTree = "<group>"; };
+		1BA1036E1D97A4A800BACE78 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1BA103701D97A4D200BACE78 /* GPA.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GPA.cpp; sourceTree = "<group>"; };
+		1BA103711D97A4D200BACE78 /* GPA.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GPA.hpp; sourceTree = "<group>"; };
+		1BA103731D97A4F100BACE78 /* Factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Factory.cpp; sourceTree = "<group>"; };
+		1BA103751D97A4FF00BACE78 /* Factory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
+		1BA103761D97A51700BACE78 /* GPAInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPAInterface.h; sourceTree = "<group>"; };
+		1BA103771D97A52900BACE78 /* StudentInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentInterface.h; sourceTree = "<group>"; };
+		1BA103781D97A5EB00BACE78 /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
+		1BA103791D97A5EB00BACE78 /* Student.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Student.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,16 +52,17 @@
 		1B1501A61D95CC47008D62F1 = {
 			isa = PBXGroup;
 			children = (
+				1BA1036E1D97A4A800BACE78 /* main.cpp */,
 				1B1501B11D95CC47008D62F1 /* lab7tester */,
 				1B1501B01D95CC47008D62F1 /* Products */,
-				1B1501BA1D95CC5A008D62F1 /* Factory.h */,
-				1B1501B91D95CC5A008D62F1 /* Factory.cpp */,
-				1B1501BB1D95CC5A008D62F1 /* GPAInterface.h */,
-				1B1501BF1D95CD3C008D62F1 /* GPA.hpp */,
-				1B1501BE1D95CD3C008D62F1 /* GPA.cpp */,
-				1B1501BC1D95CC5A008D62F1 /* StudentInterface.h */,
-				1B1501C21D95DC76008D62F1 /* Student.hpp */,
-				1B1501C11D95DC76008D62F1 /* Student.cpp */,
+				1BA103751D97A4FF00BACE78 /* Factory.h */,
+				1BA103731D97A4F100BACE78 /* Factory.cpp */,
+				1BA103711D97A4D200BACE78 /* GPA.hpp */,
+				1BA103701D97A4D200BACE78 /* GPA.cpp */,
+				1BA103771D97A52900BACE78 /* StudentInterface.h */,
+				1BA103761D97A51700BACE78 /* GPAInterface.h */,
+				1BA103791D97A5EB00BACE78 /* Student.hpp */,
+				1BA103781D97A5EB00BACE78 /* Student.cpp */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,7 +77,6 @@
 		1B1501B11D95CC47008D62F1 /* lab7tester */ = {
 			isa = PBXGroup;
 			children = (
-				1B1501B21D95CC47008D62F1 /* main.cpp */,
 			);
 			path = lab7tester;
 			sourceTree = "<group>";
@@ -138,10 +138,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B1501C01D95CD3C008D62F1 /* GPA.cpp in Sources */,
-				1B1501BD1D95CC5A008D62F1 /* Factory.cpp in Sources */,
-				1B1501B31D95CC47008D62F1 /* main.cpp in Sources */,
-				1B1501C31D95DC76008D62F1 /* Student.cpp in Sources */,
+				1BA103741D97A4F100BACE78 /* Factory.cpp in Sources */,
+				1BA103721D97A4D200BACE78 /* GPA.cpp in Sources */,
+				1BA1036F1D97A4A800BACE78 /* main.cpp in Sources */,
+				1BA1037A1D97A5EB00BACE78 /* Student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +268,7 @@
 				1B1501B81D95CC47008D62F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
