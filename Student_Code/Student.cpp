@@ -20,7 +20,7 @@ unsigned long long int Student::getID() {
 }
 
 string Student::getName() {
-    return "";
+    return m_Name;
 }
 
 string Student::getGPA() {
