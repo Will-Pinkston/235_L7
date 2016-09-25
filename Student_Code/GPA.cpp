@@ -24,7 +24,7 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
-    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/"+mapFileName;
+    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
     ifstream in_fileM;
     in_fileM.open(mapFileName);
     string fileLine;
@@ -59,13 +59,13 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
                 if (address != "") {
                     getline(in_fileM, phone);
                     if(phone != "") {
-                        cout << num_id << endl;
-                        cout << name << endl;
-                        cout << address << endl;
-                        cout << phone << endl;
+                        //cout << num_id << endl;
+                        //cout << name << endl;
+                        //cout << address << endl;
+                        //cout << phone << endl;
                         if (writeEnable) {
                             m_Map.insert(pair<unsigned long long int, StudentInterface*>(num_id,new Student(num_id, name, address, phone)));
-                            cout << endl << "written" << endl << endl;
+                            //cout << endl << "written" << endl << endl;
                         }
                     } else {
                         fRead = false;
@@ -86,7 +86,7 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     
     //----------------------------------
     //read set file
-    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/"+setFileName;
+    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
     ifstream in_fileS;
     in_fileS.open(setFileName);
     fileLine = "";

@@ -59,13 +59,13 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
                 if (address != "") {
                     getline(in_fileM, phone);
                     if(phone != "") {
-                        cout << num_id << endl;
-                        cout << name << endl;
-                        cout << address << endl;
-                        cout << phone << endl;
+                        //cout << num_id << endl;
+                        //cout << name << endl;
+                        //cout << address << endl;
+                        //cout << phone << endl;
                         if (writeEnable) {
                             m_Map.insert(pair<unsigned long long int, StudentInterface*>(num_id,new Student(num_id, name, address, phone)));
-                            cout << endl << "written" << endl << endl;
+                            //cout << endl << "written" << endl << endl;
                         }
                     } else {
                         fRead = false;
