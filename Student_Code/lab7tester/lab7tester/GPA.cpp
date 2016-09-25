@@ -21,6 +21,7 @@ set<StudentInterface*,Comparator> GPA::getSet() {
 }
 
 bool GPA::importStudents(string mapFileName, string setFileName) {
+    cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
     mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
@@ -150,6 +151,7 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
 }
 
 bool GPA::importGrades(string fileName) {
+    cout << "GPA::importGrades called with parameter: \n"+fileName <<endl<<endl;
     /*
      * importGrades()
      *
@@ -197,14 +199,18 @@ bool GPA::importGrades(string fileName) {
 }
 
 string GPA::querySet(string fileName) {
+    cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
      return "";
 }
 
 string GPA::queryMap(string fileName) {
+    cout << "GPA::queryMap called with parameter: \n"+fileName <<endl<<endl;
     return "";
 }
 
-void GPA::clear(){}
+void GPA::clear(){
+    cout << "GPA::clear called" <<endl<<endl;
+}
 
 
 
