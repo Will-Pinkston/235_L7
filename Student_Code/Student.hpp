@@ -10,6 +10,7 @@
 #define Student_hpp
 
 #include <stdio.h>
+#include <sstream>
 #include "StudentInterface.h"
 
 class Student : public StudentInterface {
