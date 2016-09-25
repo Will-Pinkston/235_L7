@@ -40,6 +40,9 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     bool writeEnable = false;
     while (fRead) {
         getline(in_fileM,fileLine);
+        if (fileLine == "") {
+            return false;
+        }
         num_id = atoi(fileLine.c_str());
         int check = in_fileM.peek();
         if(check == EOF) {
@@ -102,6 +105,9 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     writeEnable = false;
     while (fRead) {
         getline(in_fileS,fileLine);
+        if (fileLine == "") {
+            return false;
+        }
         num_id = atoi(fileLine.c_str());
         int check = in_fileS.peek();
         if(check == EOF) {
@@ -173,8 +179,10 @@ bool GPA::importGrades(string fileName) {
      * 	5291738760
      * 	HIS431
      *  	A-
-     *
-     * Compute the GPA by finding the average of all the grades with a matching student ID
+     */
+    
+    
+     /* Compute the GPA by finding the average of all the grades with a matching student ID
      * in the Grade file. The GPA is calculated by taking a Student's total sum GPA and
      * dividing by the number of classes taken. If the given student ID has no matching
      * grades in the Grade file, the GPA is 0.00. It is not necessary to store the course

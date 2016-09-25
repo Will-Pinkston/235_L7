@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include <sstream>
-#include <iomanip>
 #include "StudentInterface.h"
 
 class Student : public StudentInterface {
@@ -20,7 +19,7 @@ protected:
     string m_Name;
     string m_Address;
     string m_Phone;
-    float m_GPA;
+    int m_GPA;
     
 public:
     Student(int num_id, string name, string address, string phone);
