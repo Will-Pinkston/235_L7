@@ -24,7 +24,7 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
-    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
+    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/"+mapFileName;
     ifstream in_fileM;
     in_fileM.open(mapFileName);
     string fileLine;
@@ -86,7 +86,7 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     
     //----------------------------------
     //read set file
-    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
+    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/"+setFileName;
     ifstream in_fileS;
     in_fileS.open(setFileName);
     fileLine = "";
