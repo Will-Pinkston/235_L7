@@ -20,7 +20,7 @@ protected:
     string m_Name;
     string m_Address;
     string m_Phone;
-    int m_GPA;
+    float m_GPA;
     
 public:
     Student(int num_id, string name, string address, string phone);

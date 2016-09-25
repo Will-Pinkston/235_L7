@@ -13,6 +13,7 @@ Student::Student(int num_id, string name, string address, string phone) {
     m_Name = name;
     m_Address = address;
     m_Phone = phone;
+    m_GPA = 0;
 }
 
 unsigned long long int Student::getID() {
