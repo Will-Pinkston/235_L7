@@ -125,7 +125,8 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
                         cout << address << endl;
                         cout << phone << endl;
                         if (writeEnable) {
-                            m_Set.insert(new Student(num_id, name, address, phone));
+                            StudentInterface* addS =new Student(num_id, name, address, phone);
+                            m_Set.insert(addS);
                             cout << endl << "written" << endl << endl;
                         }
                     } else {
