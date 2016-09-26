@@ -20,18 +20,94 @@ set<StudentInterface*,Comparator> GPA::getSet() {
     return m_Set;
 }
 
+//------------------------------------------------------------------
+// utility functions
+
+//filter a file
+bool filter(string filename) {
+    
+    ifstream in_file;
+    in_file.open(filename);
+    int fcheck = in_file.peek();
+    if (fcheck == EOF) {
+        return false;
+    }
+    string fileLine;
+    //input variables
+    int num_id = -1;
+    string name = "";
+    string address = "";
+    string phone = "";
+    //input loop, if the loop reaches the end of a file writeEnable
+    //when set, the loop writes into the file and then ends
+    bool fRead = true;
+    bool writeEnable = false;
+    while (fRead) {
+        getline(in_file,fileLine);
+        num_id = atoi(fileLine.c_str());
+        int check = in_file.peek();
+        if(check == EOF) {
+            if (writeEnable == true) {
+                fRead = false;
+            } else {
+                writeEnable = true;
+                in_file.clear();
+                in_file.seekg(0,ios::beg);
+            }
+        } else if (num_id == 0) {
+            fRead = false;
+            return false;
+        } else {
+            getline(in_file,name);
+            if (name != "") {
+                getline(in_file,address);
+                if (address != "") {
+                    getline(in_file, phone);
+                    if(phone != "") {
+                        //cout << num_id << endl;
+                        //cout << name << endl;
+                        //cout << address << endl;
+                        //cout << phone << endl;
+//                        if (writeEnable) {
+//                            m_Map.insert(pair<unsigned long long int, StudentInterface*>(num_id,new Student(num_id, name, address, phone)));
+                            //cout << endl << "written" << endl << endl;
+                        }
+//                    } else {
+//                        fRead = false;
+//                        return false;
+//                    }
+                } else {
+                    fRead = false;
+                    return false;
+                }
+            } else {
+                fRead = false;
+                return false;
+            }
+        }
+    }
+    in_file.close();
+    
+    return true;
+}
+
+//------------------------------------------------------------------
+//------------------------------------------------------------------
 bool GPA::importStudents(string mapFileName, string setFileName) {
     cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
     //
     mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
-    ifstream in_fileM;
-    in_fileM.open(mapFileName);
-    int fMcheck = in_fileM.peek();
-    if (fMcheck == EOF) {
+    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
+    //check for faulty files
+    bool mTest = filter(mapFileName);
+    bool sTest = filter(setFileName);
+    if (!mTest || !sTest) {
         return false;
     }
+    ifstream in_fileM;
+    in_fileM.open(mapFileName);
     string fileLine;
     //input variables
     int num_id = -1;
@@ -91,13 +167,8 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     
     //----------------------------------
     //read set file
-    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
     ifstream in_fileS;
     in_fileS.open(setFileName);
-    int fScheck = in_fileS.peek();
-    if (fScheck == EOF) {
-        return false;
-    }
     fileLine = "";
     //input variables
     num_id = -1;
