@@ -42,7 +42,7 @@ string Student::toString() {
     stringstream ss;
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< fixed << setprecision(2);
     if (m_GPA != 0) {
-        ss << fixed << setprecision(2) << m_GPA - 0.005;
+        ss << fixed << setprecision(2) << m_GPA - 0.004;
     } else {
         ss << fixed << setprecision(2) << m_GPA;
     }

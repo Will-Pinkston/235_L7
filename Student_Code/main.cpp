@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
     for (int i = 0; i < G_map.size(); i++) {
         cout << mI->second->getName() << endl;
         cout << mI->second->getGPA() << endl;
-        mI->second->toString();
+        cout << mI->second->toString() << endl;
         mI++;
     }
     
