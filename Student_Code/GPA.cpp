@@ -294,29 +294,29 @@ bool GPA::importGrades(string fileName) {
                 if (grade != "") {
                     if (writeEnable) {
                         if (grade == "A") {
-                            classGrade = gradeA;
+                            classGrade = 4.0;
                         } else if (grade == "A-") {
-                            classGrade = gradeA - 0.3;
+                            classGrade = 3.7;
                         } else if (grade == "B+") {
-                            classGrade = gradeA - 0.6;
+                            classGrade = 3.4;
                         } else if (grade == "B") {
-                            classGrade = gradeA - 1.0;
+                            classGrade = 3.0;
                         } else if (grade == "B-") {
-                            classGrade = gradeA - 1.3;
+                            classGrade = 2.7;
                         } else if (grade == "C+") {
-                            classGrade = gradeA - 1.6;
+                            classGrade = 2.4;
                         } else if (grade == "C") {
-                            classGrade = gradeA - 2.0;
+                            classGrade = 2.0;
                         } else if (grade == "C-") {
-                            classGrade = gradeA - 2.3;
+                            classGrade = 1.7;
                         } else if (grade == "D+") {
-                            classGrade = gradeA - 2.6;
+                            classGrade = 1.4;
                         } else if (grade == "D") {
-                            classGrade = gradeA - 3.0;
+                            classGrade = 1.0;
                         } else if (grade == "D-") {
-                            classGrade = gradeA - 3.3;
+                            classGrade = 0.7;
                         } else if (grade == "E") {
-                            classGrade = gradeA - 4.0;
+                            classGrade = 0.0;
                         } else {
                             cout << "Incorrect grade read." << endl;
                         }
