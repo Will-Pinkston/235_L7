@@ -365,7 +365,7 @@ string GPA::querySet(string fileName) {
         for (int i = 0; i < m_Set.size(); i++) {
             if (numID == (*sI)->getID()) {
                 sout << (*sI)->getID() << " ";
-                sout << (*sI)->getGPA() << " ";
+                sout << fixed << setprecision(2) << (*sI)->getGPA() << " ";
                 sout << (*sI)->getName() << endl;
                 found = true;
                 break;
@@ -395,7 +395,7 @@ string GPA::queryMap(string fileName) {
         for (int i = 0; i < m_Map.size(); i++) {
             if (numID == mI->second->getID()) {
                 sout << mI->second->getID() << " ";
-                sout << mI->second->getGPA() << " ";
+                sout << fixed << setprecision(2) << mI->second->getGPA() << " ";
                 sout << mI->second->getName() << endl;
                 found = true;
                 break;
