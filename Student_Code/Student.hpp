@@ -20,8 +20,8 @@ protected:
     string m_Name;
     string m_Address;
     string m_Phone;
-    float m_GPA;
-    float m_totalGPA;
+    double m_GPA;
+    double m_totalGPA;
     int m_numClasses;
     
 public:
