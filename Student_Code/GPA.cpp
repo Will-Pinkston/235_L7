@@ -244,10 +244,17 @@ bool GPA::importGrades(string fileName) {
      *  	A-
      */
     fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
-    bool fTest = filter(fileName);
-    if (!fTest) {
+    //bool fTest = filter(fileName);
+    //if (!fTest) {
+    //    return false;
+    //}
+    ifstream iFile_test;
+    iFile_test.open(fileName);
+    int ifileItest = iFile_test.peek();
+    if (ifileItest == EOF) {
         return false;
     }
+    
     map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
     set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
     float gradeA = 4.0;
@@ -284,6 +291,7 @@ bool GPA::importGrades(string fileName) {
             //is a map or a set?
             //check map
             bool IDfound = false;
+            mI = m_Map.begin();
             for (int i = 0; i < m_Set.size(); i++) {
                 if (mI->second->getID() == numID) {
                     MorS = "M";
@@ -293,6 +301,7 @@ bool GPA::importGrades(string fileName) {
                 }
             }
             if (!IDfound) {
+                sI = m_Set.begin();
                 for (int i = 0; i < m_Map.size(); i++) {
                     if ((*sI)->getID() == numID) {
                         MorS = "S";
@@ -342,6 +351,7 @@ bool GPA::importGrades(string fileName) {
                             if (MorS == "M") {
                                 m_Map[numID]->addGPA(classGrade);
                             } else if (MorS == "S") {
+                                sI = m_Set.begin();
                                 for (int i = 0; i < m_Map.size(); i++) {
                                     if ((*sI)->getID() == numID) {
                                         (*sI)->addGPA(classGrade);

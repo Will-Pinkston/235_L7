@@ -26,9 +26,9 @@ int main(int argc, const char * argv[]) {
     G_obj->importStudents(one, two);
     map<unsigned long long int,StudentInterface*> G_map = G_obj->getMap();
     set<StudentInterface*,Comparator> G_set = G_obj->getSet();
-    
-    map<unsigned long long int,StudentInterface*>::iterator mI = G_map.begin();
-    set<StudentInterface*,Comparator>::iterator sI = G_set.begin();
+    string three;
+    getline(cin,three);
+    G_obj->importGrades(three);
     
     cout << "quit (q)" << endl;
     string q;
