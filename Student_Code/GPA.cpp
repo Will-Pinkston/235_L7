@@ -388,19 +388,28 @@ string GPA::queryMap(string fileName) {
     if (check != EOF) {
         ifstream in_file;
         in_file.open(fileName);
-        string fileLine;
-        getline(in_file,fileLine);
-        int numID = atoi(fileLine.c_str());
-        bool found = false;
-        for (int i = 0; i < m_Map.size(); i++) {
-            if (numID == mI->second->getID()) {
-                sout << mI->second->getID() << " ";
-                sout << fixed << setprecision(2) << mI->second->getGPA() << " ";
-                sout << mI->second->getName() << endl;
-                found = true;
-                break;
+        bool fRead = true;
+        while (fRead) {
+            string fileLine = "";
+            getline(in_file,fileLine);
+            if (fileLine != "") {
+                int numID = atoi(fileLine.c_str());
+                bool found = false;
+                for (int i = 0; i < m_Map.size(); i++) {
+                    if (numID == mI->second->getID()) {
+                        sout.precision(20);
+                        sout << mI->second->getID() << " ";
+                        sout.precision(2);
+                        sout << fixed << mI->second->getGPA() << " ";
+                        sout << mI->second->getName() << endl;
+                        found = true;
+                        break;
+                    }
+                    mI++;
+                }
+            } else {
+                fRead = false;
             }
-            mI++;
         }
     }
     return sout.str();
