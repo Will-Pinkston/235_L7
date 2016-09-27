@@ -36,14 +36,15 @@ void Student::addGPA(double classGrade) {
     m_numClasses++;
     m_totalGPA += classGrade;
     m_GPA = m_totalGPA / m_numClasses;
-    if (m_ID == 17825823) {
-        m_GPA = 1.56;
-    }
+//    if (m_ID == 17825823) {
+//        m_GPA = 1.56;
+//    }
 }
 
 string Student::toString() {
     stringstream ss;
     //ss.precision(3);
+    //round in the map, dont round in the set?
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n";
     if (m_GPA != 0) {
         ss << fixed << setprecision(2) << m_GPA - 0.0045;
