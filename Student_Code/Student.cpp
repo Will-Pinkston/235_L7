@@ -44,8 +44,8 @@ string Student::toString() {
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n";
     if (m_GPA != 0) {
         
-        float rounderr = m_GPA - 0.006;
-        if (%rounderr == 0) {
+        int rounder = (m_GPA - 0.006) * 100;
+        if ((rounder % 1) == 0) {
             ss << fixed << setprecision(2) << m_GPA;
         } else {
             ss << fixed << setprecision(2) << m_GPA - 0.001;
