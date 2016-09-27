@@ -222,32 +222,8 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
 
 bool GPA::importGrades(string fileName) {
     cout << "GPA::importGrades called with parameter: \n"+fileName <<endl<<endl;
-    /*
-     * importGrades()
-     *
-     * Read in and parse through the given file. Each part of an entry in the file
-     * is given on a separate line in the file. Student ID is first, course is
-     * second, and grade is last. There are no blank lines between entries. The
-     * following is an example file:
-     *
-     * 	5291738860
-     * 	CHEM134
-     * 	A
-     * 	9251734870
-     * 	BOT180
-     * 	B
-     * 	9251733870
-     * 	PE273
-     * 	D+
-     * 	5291738760
-     * 	HIS431
-     *  	A-
-     */
     fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
-    //bool fTest = filter(fileName);
-    //if (!fTest) {
-    //    return false;
-    //}
+    // check if valid file
     ifstream iFile_test;
     iFile_test.open(fileName);
     int ifileItest = iFile_test.peek();
@@ -287,7 +263,7 @@ bool GPA::importGrades(string fileName) {
             fRead = false;
             return false;
         } else {
-            //--------------------------------
+            //---------------------------------------------
             //is a map or a set?
             //check map
             bool IDfound = false;
@@ -311,7 +287,7 @@ bool GPA::importGrades(string fileName) {
                     }
                 }
             }
-            //--------------------------------
+            //---------------------------------------------
             getline(in_file, className);
             if (className != "") {
                 getline(in_file, grade);
@@ -324,23 +300,23 @@ bool GPA::importGrades(string fileName) {
                         } else if (grade == "B+") {
                             classGrade = gradeA - 0.6;
                         } else if (grade == "B") {
-                            classGrade = gradeA - 1;
+                            classGrade = gradeA - 1.0;
                         } else if (grade == "B-") {
                             classGrade = gradeA - 1.3;
                         } else if (grade == "C+") {
                             classGrade = gradeA - 1.6;
                         } else if (grade == "C") {
-                            classGrade = gradeA - 2;
+                            classGrade = gradeA - 2.0;
                         } else if (grade == "C-") {
                             classGrade = gradeA - 2.3;
                         } else if (grade == "D+") {
                             classGrade = gradeA - 2.6;
                         } else if (grade == "D") {
-                            classGrade = gradeA - 3;
+                            classGrade = gradeA - 3.0;
                         } else if (grade == "D-") {
                             classGrade = gradeA - 3.3;
                         } else if (grade == "E") {
-                            classGrade = gradeA - 4;
+                            classGrade = gradeA - 4.0;
                         } else {
                             cout << "Incorrect grade read." << endl;
                         }
@@ -355,6 +331,7 @@ bool GPA::importGrades(string fileName) {
                                 for (int i = 0; i < m_Map.size(); i++) {
                                     if ((*sI)->getID() == numID) {
                                         (*sI)->addGPA(classGrade);
+                                        break;
                                     } else {
                                         sI++;
                                     }
@@ -376,25 +353,6 @@ bool GPA::importGrades(string fileName) {
     }
     in_file.close();
     //-----------------------------------------------------
-    
-    /* Compute the GPA by finding the average of all the grades with a matching student ID
-     * in the Grade file. The GPA is calculated by taking a Student's total sum GPA and
-     * dividing by the number of classes taken. If the given student ID has no matching
-     * grades in the Grade file, the GPA is 0.00. It is not necessary to store the course
-     * names so long as the total number of courses taken is counted.
-     *
-     * You may assume that the given student ID exists in the map or set.
-     *
-     * Use the following point values for each grade.
-     *
-     *		  A = 4.0  A- = 3.7
-     *	B+ = 3.4  B = 3.0  B- = 2.7
-     *	C+ = 2.4  C = 2.0  C- = 1.7
-     *	D+ = 1.4  D = 1.0  D- = 0.7
-     *		  E = 0.0
-     *
-     * Returns false if an invalid filename is given, otherwise true.
-     */
     return true;
 }
 
