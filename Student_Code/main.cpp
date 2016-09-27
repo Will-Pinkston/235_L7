@@ -30,6 +30,22 @@ int main(int argc, const char * argv[]) {
     getline(cin,three);
     G_obj->importGrades(three);
     
+    set<StudentInterface*,Comparator>::iterator sI = G_set.begin();
+    map<unsigned long long int,StudentInterface*>::iterator mI = G_map.begin();
+    
+    for (int i = 0; i < G_set.size(); i++) {
+        cout << (*sI)->getName() << endl;
+        cout << (*sI)->getGPA() << endl;
+        cout << (*sI)->toString() << endl;
+        sI++;
+    }
+    for (int i = 0; i < G_map.size(); i++) {
+        cout << mI->second->getName() << endl;
+        cout << mI->second->getGPA() << endl;
+        mI->second->toString();
+        mI++;
+    }
+    
     cout << "quit (q)" << endl;
     string q;
     cin >> q;
