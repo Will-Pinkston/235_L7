@@ -140,13 +140,8 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
                 if (address != "") {
                     getline(in_fileM, phone);
                     if(phone != "") {
-                        //cout << num_id << endl;
-                        //cout << name << endl;
-                        //cout << address << endl;
-                        //cout << phone << endl;
                         if (writeEnable) {
                             m_Map.insert(pair<unsigned long long int, StudentInterface*>(num_id,new Student(num_id, name, address, phone)));
-                            //cout << endl << "written" << endl << endl;
                         }
                     } else {
                         fRead = false;
@@ -201,14 +196,9 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
                 if (address != "") {
                     getline(in_fileS, phone);
                     if(phone != "") {
-                        cout << num_id << endl;
-                        cout << name << endl;
-                        cout << address << endl;
-                        cout << phone << endl;
                         if (writeEnable) {
                             StudentInterface* addS =new Student(num_id, name, address, phone);
                             m_Set.insert(addS);
-                            cout << endl << "written" << endl << endl;
                         }
                     } else {
                         fRead = false;
@@ -253,7 +243,129 @@ bool GPA::importGrades(string fileName) {
      * 	HIS431
      *  	A-
      */
+    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+    bool fTest = filter(fileName);
+    if (!fTest) {
+        return false;
+    }
+    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+    set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
+    float gradeA = 4.0;
+    float classGrade = -1;
+    int numID;
+    string fileLine;
+    string className;
+    string grade;
     
+    ifstream in_file;
+    in_file.open(fileName);
+    //-----------------------------------------------------
+    //read and parse file data
+    string MorS;
+    bool fRead = true;
+    bool writeEnable = false;
+    while (fRead) {
+        getline(in_file,fileLine);
+        numID = atoi(fileLine.c_str());
+        int check = in_file.peek();
+        if(check == EOF) {
+            if (writeEnable == true) {
+                fRead = false;
+            } else {
+                writeEnable = true;
+                in_file.clear();
+                in_file.seekg(0,ios::beg);
+            }
+        } else if (numID == 0) {
+            fRead = false;
+            return false;
+        } else {
+            //--------------------------------
+            //is a map or a set?
+            //check map
+            bool IDfound = false;
+            for (int i = 0; i < m_Set.size(); i++) {
+                if (mI->second->getID() == numID) {
+                    MorS = "M";
+                    IDfound = true;
+                } else {
+                    mI++;
+                }
+            }
+            if (!IDfound) {
+                for (int i = 0; i < m_Map.size(); i++) {
+                    if ((*sI)->getID() == numID) {
+                        MorS = "S";
+                        IDfound = true;
+                    } else {
+                        sI++;
+                    }
+                }
+            }
+            //--------------------------------
+            getline(in_file, className);
+            if (className != "") {
+                getline(in_file, grade);
+                if (grade != "") {
+                    if (writeEnable) {
+                        if (grade == "A") {
+                            classGrade = gradeA;
+                        } else if (grade == "A-") {
+                            classGrade = gradeA - 0.3;
+                        } else if (grade == "B+") {
+                            classGrade = gradeA - 0.6;
+                        } else if (grade == "B") {
+                            classGrade = gradeA - 1;
+                        } else if (grade == "B-") {
+                            classGrade = gradeA - 1.3;
+                        } else if (grade == "C+") {
+                            classGrade = gradeA - 1.6;
+                        } else if (grade == "C") {
+                            classGrade = gradeA - 2;
+                        } else if (grade == "C-") {
+                            classGrade = gradeA - 2.3;
+                        } else if (grade == "D+") {
+                            classGrade = gradeA - 2.6;
+                        } else if (grade == "D") {
+                            classGrade = gradeA - 3;
+                        } else if (grade == "D-") {
+                            classGrade = gradeA - 3.3;
+                        } else if (grade == "E") {
+                            classGrade = gradeA - 4;
+                        } else {
+                            cout << "Incorrect grade read." << endl;
+                        }
+                        //-------- -------- -------- ---- --- -- -
+                        // write to the student's file
+                        // void Student::addGPA(double classGrade)
+                        if (classGrade != -1) {
+                            if (MorS == "M") {
+                                m_Map[numID]->addGPA(classGrade);
+                            } else if (MorS == "S") {
+                                for (int i = 0; i < m_Map.size(); i++) {
+                                    if ((*sI)->getID() == numID) {
+                                        (*sI)->addGPA(classGrade);
+                                    } else {
+                                        sI++;
+                                    }
+                                }
+
+                            }
+                        }
+                        //-------- -------- -------- ---- --- -- -
+                    }
+                } else {
+                    fRead = false;
+                    return false;
+                }
+            } else {
+                fRead = false;
+                return false;
+            }
+        }
+    }
+    in_file.close();
+    //-----------------------------------------------------
     
     /* Compute the GPA by finding the average of all the grades with a matching student ID
      * in the Grade file. The GPA is calculated by taking a Student's total sum GPA and
@@ -273,11 +385,7 @@ bool GPA::importGrades(string fileName) {
      *
      * Returns false if an invalid filename is given, otherwise true.
      */
-    
-    
-    
-    
-    return false;
+    return true;
 }
 
 string GPA::querySet(string fileName) {
@@ -292,7 +400,14 @@ string GPA::queryMap(string fileName) {
 
 void GPA::clear(){
     cout << "GPA::clear called" <<endl<<endl;
+    m_Set.clear();
+    m_Map.clear();
 }
+
+
+
+
+
 
 
 

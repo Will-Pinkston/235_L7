@@ -15,6 +15,8 @@
 
 #include <iomanip>
 
+using namespace std;
+
 int main(int argc, const char * argv[]) {
     GPAInterface* G_obj = Factory::getGPA();
     string one;
@@ -23,7 +25,20 @@ int main(int argc, const char * argv[]) {
     getline(cin,two);
     G_obj->importStudents(one, two);
     map<unsigned long long int,StudentInterface*> G_map = G_obj->getMap();
-    cout << G_map[11812277]->toString();
+    set<StudentInterface*,Comparator> G_set = G_obj->getSet();
     
+    map<unsigned long long int,StudentInterface*>::iterator mI = G_map.begin();
+    set<StudentInterface*,Comparator>::iterator sI = G_set.begin();
+    
+    cout << "quit (q)" << endl;
+    string q;
+    cin >> q;
+    if (q == "q") {
+        G_obj->clear();
+    }
     return 0;
 }
+
+
+
+

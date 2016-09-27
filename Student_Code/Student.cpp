@@ -14,10 +14,12 @@ Student::Student(int num_id, string name, string address, string phone) {
     m_Address = address;
     m_Phone = phone;
     m_GPA = 0;
+    m_totalGPA = 0;
+    m_numClasses = 0;
 }
 
 unsigned long long int Student::getID() {
-    return 1;
+    return m_ID;
 }
 
 string Student::getName() {
@@ -25,30 +27,18 @@ string Student::getName() {
 }
 
 string Student::getGPA() {
-    return "";
+    stringstream GPP;
+    GPP << m_GPA;
+    return GPP.str();
 }
 
 void Student::addGPA(double classGrade) {
-    
+    m_numClasses++;
+    m_totalGPA += classGrade;
+    m_GPA = (m_totalGPA / m_numClasses);
 }
 
 string Student::toString() {
-    /*
-     * toString()
-     *
-     * The student object will be put into string representation. Student info will be
-     * ordered ID, name, address, phone number, and GPA. Each piece of information will
-     * be on its own line. GPA will not have a newline following it and the precision
-     * of the GPA will be set to two decimal places. For example,
-     *
-     * 123456789
-     * Ben Thompson
-     * 17 Russell St, Provo, UT 84606
-     * 555-555-5555
-     * 3.12
-     *
-     * Returns a string representation of the student object There is no trailing new line.
-     */
     stringstream ss;
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n"<< fixed << setprecision(2) << m_GPA;
     return ss.str();;
