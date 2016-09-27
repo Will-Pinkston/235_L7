@@ -35,7 +35,11 @@ string Student::getGPA() {
 void Student::addGPA(double classGrade) {
     m_numClasses++;
     m_totalGPA += classGrade;
-    m_GPA = (m_totalGPA / m_numClasses);
+    stringstream grade;
+    grade.precision(2);
+    grade << fixed << (m_totalGPA / m_numClasses);
+    string sGP = grade.str();
+    m_GPA = atoi(sGP.c_str());
 }
 
 string Student::toString() {
