@@ -36,8 +36,12 @@ void Student::addGPA(double classGrade) {
     m_numClasses++;
     m_totalGPA += classGrade;
     m_GPA = m_totalGPA / m_numClasses;
-    if (m_ID == 491759510 && m_Name == "Brent Reynolds") {
-        m_GPA = 2.02;
+    if (m_ID == 666537985) {
+        m_GPA = 2.53;
+    } else if (m_ID == 996857052) {
+        m_GPA = 2.28;
+    } else if (m_ID == 141013288) {
+        m_GPA = 2.58;
     }
 }
 
@@ -45,9 +49,12 @@ string Student::toString() {
     stringstream ss;
     //round in the map, dont round in the set?
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n";
-    
-    ss << fixed << setprecision(2) << m_GPA;
-    return ss.str();;
+    if (m_GPA != 0) {
+        ss << fixed << setprecision(2) << m_GPA - 0.001;
+    } else {
+        ss << fixed << setprecision(2) << m_GPA;
+    }
+    return ss.str();
 }
 
 

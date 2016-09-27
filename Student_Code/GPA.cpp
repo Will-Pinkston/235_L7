@@ -223,7 +223,6 @@ bool GPA::importGrades(string fileName) {
     
     map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
     set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
-    float gradeA = 4.0;
     float classGrade = -1;
     int numID;
     string fileLine;
@@ -348,12 +347,63 @@ bool GPA::importGrades(string fileName) {
 
 string GPA::querySet(string fileName) {
     cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
-    return "";
+    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+    
+    stringstream sout;
+    ifstream in_file_test;
+    in_file_test.open(fileName);
+    int check = in_file_test.peek();
+    set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
+    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+    if (check != EOF) {
+        ifstream in_file;
+        in_file.open(fileName);
+        string fileLine;
+        getline(in_file,fileLine);
+        int numID = atoi(fileLine.c_str());
+        bool found = false;
+        for (int i = 0; i < m_Set.size(); i++) {
+            if (numID == (*sI)->getID()) {
+                sout << (*sI)->getID() << " ";
+                sout << (*sI)->getGPA() << " ";
+                sout << (*sI)->getName() << endl;
+                found = true;
+                break;
+            }
+            sI++;
+        }
+    }
+    return sout.str();
 }
 
 string GPA::queryMap(string fileName) {
     cout << "GPA::queryMap called with parameter: \n"+fileName <<endl<<endl;
-    return "";
+    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+    
+    stringstream sout;
+    ifstream in_file_test;
+    in_file_test.open(fileName);
+    int check = in_file_test.peek();
+    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+    if (check != EOF) {
+        ifstream in_file;
+        in_file.open(fileName);
+        string fileLine;
+        getline(in_file,fileLine);
+        int numID = atoi(fileLine.c_str());
+        bool found = false;
+        for (int i = 0; i < m_Map.size(); i++) {
+            if (numID == mI->second->getID()) {
+                sout << mI->second->getID() << " ";
+                sout << mI->second->getGPA() << " ";
+                sout << mI->second->getName() << endl;
+                found = true;
+                break;
+            }
+            mI++;
+        }
+    }
+    return sout.str();
 }
 
 void GPA::clear(){

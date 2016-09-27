@@ -32,7 +32,6 @@ int main(int argc, const char * argv[]) {
     
     set<StudentInterface*,Comparator>::iterator sI = G_set.begin();
     map<unsigned long long int,StudentInterface*>::iterator mI = G_map.begin();
-    
     for (int i = 0; i < G_set.size(); i++) {
         cout << (*sI)->getName() << endl;
         cout << (*sI)->getGPA() << endl;
@@ -45,6 +44,10 @@ int main(int argc, const char * argv[]) {
         cout << mI->second->toString() << endl;
         mI++;
     }
+    
+    string four;
+    getline(cin,four);
+    G_obj->querySet(four);
     
     cout << "quit (q)" << endl;
     string q;
