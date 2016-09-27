@@ -40,10 +40,10 @@ void Student::addGPA(double classGrade) {
 
 string Student::toString() {
     stringstream ss;
-    ss.precision(3);
+    //ss.precision(3);
     ss << m_ID <<"\n"<< m_Name <<"\n"<< m_Address <<"\n"<< m_Phone <<"\n";
     if (m_GPA != 0) {
-        ss /* << fixed << setprecision(2) */ << m_GPA /*- 0.005*/;
+        ss << fixed << setprecision(2) << m_GPA - 0.0045;
     } else {
         ss << fixed << setprecision(2) << m_GPA;
     }
