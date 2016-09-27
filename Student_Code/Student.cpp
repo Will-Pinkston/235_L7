@@ -45,7 +45,7 @@ string Student::toString() {
     if (m_GPA != 0) {
         ss /* << fixed << setprecision(2) */ << m_GPA /*- 0.005*/;
     } else {
-        ss /*  << fixed << setprecision(2) */ << m_GPA;
+        ss << fixed << setprecision(2) << m_GPA;
     }
     return ss.str();;
 }
