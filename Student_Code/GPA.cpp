@@ -354,23 +354,29 @@ string GPA::querySet(string fileName) {
     in_file_test.open(fileName);
     int check = in_file_test.peek();
     set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
-    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+    //map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
     if (check != EOF) {
         ifstream in_file;
         in_file.open(fileName);
-        string fileLine;
-        getline(in_file,fileLine);
-        int numID = atoi(fileLine.c_str());
-        bool found = false;
-        for (int i = 0; i < m_Set.size(); i++) {
-            if (numID == (*sI)->getID()) {
-                sout << (*sI)->getID() << " ";
-                sout << fixed << setprecision(2) << (*sI)->getGPA() << " ";
-                sout << (*sI)->getName() << endl;
-                found = true;
-                break;
+        string fileLine = "";
+        bool fRead = true;
+        while (fRead) {
+            getline(in_file,fileLine);
+            if (fileLine != "") {
+                int numID = atoi(fileLine.c_str());
+                sI = m_Set.begin();
+                for (int i = 0; i < m_Set.size(); i++) {
+                    if (numID == (*sI)->getID()) {
+                        sout << (*sI)->getID() << " ";
+                        sout << fixed << setprecision(2) << (*sI)->getGPA() << " ";
+                        sout << (*sI)->getName() << endl;
+                        break;
+                    }
+                    sI++;
+                }
+            } else {
+                fRead = false;
             }
-            sI++;
         }
     }
     return sout.str();
@@ -394,7 +400,7 @@ string GPA::queryMap(string fileName) {
             getline(in_file,fileLine);
             if (fileLine != "") {
                 int numID = atoi(fileLine.c_str());
-                bool found = false;
+                mI = m_Map.begin();
                 for (int i = 0; i < m_Map.size(); i++) {
                     if (numID == mI->second->getID()) {
                         sout.precision(20);
@@ -402,7 +408,6 @@ string GPA::queryMap(string fileName) {
                         sout.precision(2);
                         sout << fixed << mI->second->getGPA() << " ";
                         sout << mI->second->getName() << endl;
-                        found = true;
                         break;
                     }
                     mI++;
