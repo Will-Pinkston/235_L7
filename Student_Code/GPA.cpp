@@ -12,6 +12,10 @@ GPA::GPA()
 {
     //
 }
+GPA::~GPA()
+{
+    this->clear();
+}
 
 map<unsigned long long int,StudentInterface*> GPA::getMap() {
     return m_Map;
@@ -88,12 +92,11 @@ bool filter(string filename)
 //------------------------------------------------------------------
 bool GPA::importStudents(string mapFileName, string setFileName)
 {
-//    cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
     //
-    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
-    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
+//    mapFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+mapFileName;
+//    setFileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+setFileName;
     //check for faulty files
     bool mTest = filter(mapFileName);
     bool sTest = filter(setFileName);
@@ -216,7 +219,7 @@ bool GPA::importStudents(string mapFileName, string setFileName)
 
 bool GPA::importGrades(string fileName)
 {
-    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+//    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
     ifstream in_file_test;
     in_file_test.open(fileName);
     int fCheck = in_file_test.peek();
@@ -316,15 +319,14 @@ bool GPA::importGrades(string fileName)
 
 string GPA::querySet(string fileName)
 {
-    cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
-    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+//    cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
+//    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
     
     stringstream sout;
     ifstream in_file_test;
     in_file_test.open(fileName);
     int check = in_file_test.peek();
     set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
-    //map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
     if (check != EOF) {
         ifstream in_file;
         in_file.open(fileName);
@@ -356,8 +358,7 @@ string GPA::querySet(string fileName)
 
 string GPA::queryMap(string fileName)
 {
-    cout << "GPA::queryMap called with parameter: \n"+fileName <<endl<<endl;
-    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+//    fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
     
     stringstream sout;
     ifstream in_file_test;
@@ -401,152 +402,22 @@ string GPA::queryMap(string fileName)
 }
 
 void GPA::clear(){
-//    cout << "GPA::clear called" <<endl<<endl;
+    set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
+    for (int i = 0; i < m_Set.size(); i++)
+    {
+        (*sI)->delete;
+        sI++;
+    }
     m_Set.clear();
+    
+    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+    for (int i = 0; i < m_Map.begin(); i++)
+    {
+        m_Map->delete;
+        mI++;
+    }
     m_Map.clear();
 }
-
-
-
-
-
-
-/* the guts of my initial importGrades function
- 
- cout << "GPA::importGrades called with parameter: \n"+fileName <<endl<<endl;
- fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
- // check if valid file
- ifstream iFile_test;
- iFile_test.open(fileName);
- int ifileItest = iFile_test.peek();
- if (ifileItest == EOF) {
- return false;
- }
- 
- map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
- set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
- float classGrade = -1;
- int numID;
- string fileLine;
- string className;
- string grade;
- 
- ifstream in_file;
- in_file.open(fileName);
- //-----------------------------------------------------
- //read and parse file data
- string MorS;
- bool fRead = true;
- bool writeEnable = false;
- while (fRead) {
- getline(in_file,fileLine);
- numID = atoi(fileLine.c_str());
- int check = in_file.peek();
- if(check == EOF) {
- if (writeEnable == true) {
- fRead = false;
- } else {
- writeEnable = true;
- in_file.clear();
- in_file.seekg(0,ios::beg);
- }
- } else if (numID == 0) {
- fRead = false;
- return false;
- } else {
- //---------------------------------------------
- //is a map or a set?
- //check map
- bool IDfound = false;
- mI = m_Map.begin();
- for (int i = 0; i < m_Set.size(); i++) {
- if (mI->second->getID() == numID) {
- MorS = "M";
- IDfound = true;
- } else {
- mI++;
- }
- }
- if (!IDfound) {
- sI = m_Set.begin();
- for (int i = 0; i < m_Map.size(); i++) {
- if ((*sI)->getID() == numID) {
- MorS = "S";
- IDfound = true;
- } else {
- sI++;
- }
- }
- }
- //---------------------------------------------
- getline(in_file, className);
- if (className != "") {
- getline(in_file, grade);
- if (grade != "") {
- if (writeEnable) {
- if (grade == "A") {
- classGrade = 4.0;
- } else if (grade == "A-") {
- classGrade = 3.7;
- } else if (grade == "B+") {
- classGrade = 3.4;
- } else if (grade == "B") {
- classGrade = 3.0;
- } else if (grade == "B-") {
- classGrade = 2.7;
- } else if (grade == "C+") {
- classGrade = 2.4;
- } else if (grade == "C") {
- classGrade = 2.0;
- } else if (grade == "C-") {
- classGrade = 1.7;
- } else if (grade == "D+") {
- classGrade = 1.4;
- } else if (grade == "D") {
- classGrade = 1.0;
- } else if (grade == "D-") {
- classGrade = 0.7;
- } else if (grade == "E") {
- classGrade = 0.0;
- } else {
- cout << "Incorrect grade read." << endl;
- }
- //-------- -------- -------- ---- --- -- -
- // write to the student's file
- // void Student::addGPA(double classGrade)
- if (classGrade != -1) {
- if (MorS == "M") {
- m_Map[numID]->addGPA(classGrade);
- } else if (MorS == "S") {
- sI = m_Set.begin();
- for (int i = 0; i < m_Map.size(); i++) {
- if ((*sI)->getID() == numID) {
- (*sI)->addGPA(classGrade);
- break;
- } else {
- sI++;
- }
- }
- 
- }
- }
- //-------- -------- -------- ---- --- -- -
- }
- } else {
- fRead = false;
- return false;
- }
- } else {
- fRead = false;
- return false;
- }
- }
- }
- in_file.close();
- //-----------------------------------------------------
- return true;
- 
- */
 
 
 

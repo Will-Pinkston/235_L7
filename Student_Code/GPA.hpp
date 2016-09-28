@@ -25,6 +25,7 @@ protected:
     
 public:
     GPA();
+    ~GPA();
     
     map<unsigned long long int,StudentInterface*> getMap();
     set<StudentInterface*,Comparator> getSet();
