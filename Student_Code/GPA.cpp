@@ -8,7 +8,8 @@
 
 #include "GPA.hpp"
 
-GPA::GPA() {
+GPA::GPA()
+{
     //
 }
 
@@ -16,7 +17,8 @@ map<unsigned long long int,StudentInterface*> GPA::getMap() {
     return m_Map;
 }
 
-set<StudentInterface*,Comparator> GPA::getSet() {
+set<StudentInterface*,Comparator> GPA::getSet()
+{
     return m_Set;
 }
 
@@ -24,7 +26,8 @@ set<StudentInterface*,Comparator> GPA::getSet() {
 // utility functions
 
 //filter a file
-bool filter(string filename) {
+bool filter(string filename)
+{
     
     ifstream in_file;
     in_file.open(filename);
@@ -83,8 +86,9 @@ bool filter(string filename) {
 
 //------------------------------------------------------------------
 //------------------------------------------------------------------
-bool GPA::importStudents(string mapFileName, string setFileName) {
-    cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
+bool GPA::importStudents(string mapFileName, string setFileName)
+{
+//    cout << "GPA::importStudents called with parameters: \n"+mapFileName+"\n"+setFileName <<endl<<endl;
     //----------------------------------
     //read map file
     //
@@ -210,142 +214,107 @@ bool GPA::importStudents(string mapFileName, string setFileName) {
     return true;
 }
 
-bool GPA::importGrades(string fileName) {
-    cout << "GPA::importGrades called with parameter: \n"+fileName <<endl<<endl;
+bool GPA::importGrades(string fileName)
+{
     fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
-    // check if valid file
-    ifstream iFile_test;
-    iFile_test.open(fileName);
-    int ifileItest = iFile_test.peek();
-    if (ifileItest == EOF) {
+    ifstream in_file_test;
+    in_file_test.open(fileName);
+    int fCheck = in_file_test.peek();
+    if (fCheck != EOF)
+    {
+        string fileLine;
+        int counter = 0;
+        while (getline(in_file_test,fileLine))
+        {
+            counter++;
+        }
+        if (counter%3 == 0)
+        {
+            in_file_test.close();
+            ifstream in_file;
+            int num_ID;
+            string className;
+            string classGrade;
+            while(getline(in_file, fileLine) && getline(in_file, className) && getline(in_file, classGrade))
+            {
+                double DclassGrade = 0;
+                if (classGrade == "A")
+                {
+                    DclassGrade = 4.0;
+                }
+                else if (classGrade == "A-")
+                {
+                    DclassGrade = 3.7;
+                }
+                else if (classGrade == "B+")
+                {
+                    DclassGrade = 3.4;
+                }
+                else if (classGrade == "B")
+                {
+                    DclassGrade = 3.0;
+                }
+                else if (classGrade == "B-")
+                {
+                    DclassGrade = 2.7;
+                }
+                else if (classGrade == "C+")
+                {
+                    DclassGrade = 2.4;
+                }
+                else if (classGrade == "C")
+                {
+                    DclassGrade = 2.0;
+                }
+                else if (classGrade == "C-")
+                {
+                    DclassGrade = 1.7;
+                }
+                else if (classGrade == "D+")
+                {
+                    DclassGrade = 1.4;
+                }
+                else if (classGrade == "D")
+                {
+                    DclassGrade = 1.0;
+                }
+                else if (classGrade == "D-")
+                {
+                    DclassGrade = 0.7;
+                }
+                else if (classGrade == "E")
+                {
+                    DclassGrade = 0.0;
+                }
+                num_ID = atoi(fileLine.c_str());
+                if (m_Map.find(num_ID) != m_Map.end()) {
+                    m_Map[num_ID]->addGPA(DclassGrade);
+                }
+                else
+                {
+                    for (StudentInterface* s: m_Set)
+                    {
+                        if (s->getID() == num_ID)
+                        {
+                            s->addGPA(DclassGrade);
+                        }
+                    }
+                }
+            }
+            return true;
+        } else {
+            //missing line in the file
+            return false;
+        }
+        
+    } else {
+        //no file to open
         return false;
     }
-    
-    map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
-    set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
-    float classGrade = -1;
-    int numID;
-    string fileLine;
-    string className;
-    string grade;
-    
-    ifstream in_file;
-    in_file.open(fileName);
-    //-----------------------------------------------------
-    //read and parse file data
-    string MorS;
-    bool fRead = true;
-    bool writeEnable = false;
-    while (fRead) {
-        getline(in_file,fileLine);
-        numID = atoi(fileLine.c_str());
-        int check = in_file.peek();
-        if(check == EOF) {
-            if (writeEnable == true) {
-                fRead = false;
-            } else {
-                writeEnable = true;
-                in_file.clear();
-                in_file.seekg(0,ios::beg);
-            }
-        } else if (numID == 0) {
-            fRead = false;
-            return false;
-        } else {
-            //---------------------------------------------
-            //is a map or a set?
-            //check map
-            bool IDfound = false;
-            mI = m_Map.begin();
-            for (int i = 0; i < m_Set.size(); i++) {
-                if (mI->second->getID() == numID) {
-                    MorS = "M";
-                    IDfound = true;
-                } else {
-                    mI++;
-                }
-            }
-            if (!IDfound) {
-                sI = m_Set.begin();
-                for (int i = 0; i < m_Map.size(); i++) {
-                    if ((*sI)->getID() == numID) {
-                        MorS = "S";
-                        IDfound = true;
-                    } else {
-                        sI++;
-                    }
-                }
-            }
-            //---------------------------------------------
-            getline(in_file, className);
-            if (className != "") {
-                getline(in_file, grade);
-                if (grade != "") {
-                    if (writeEnable) {
-                        if (grade == "A") {
-                            classGrade = 4.0;
-                        } else if (grade == "A-") {
-                            classGrade = 3.7;
-                        } else if (grade == "B+") {
-                            classGrade = 3.4;
-                        } else if (grade == "B") {
-                            classGrade = 3.0;
-                        } else if (grade == "B-") {
-                            classGrade = 2.7;
-                        } else if (grade == "C+") {
-                            classGrade = 2.4;
-                        } else if (grade == "C") {
-                            classGrade = 2.0;
-                        } else if (grade == "C-") {
-                            classGrade = 1.7;
-                        } else if (grade == "D+") {
-                            classGrade = 1.4;
-                        } else if (grade == "D") {
-                            classGrade = 1.0;
-                        } else if (grade == "D-") {
-                            classGrade = 0.7;
-                        } else if (grade == "E") {
-                            classGrade = 0.0;
-                        } else {
-                            cout << "Incorrect grade read." << endl;
-                        }
-                        //-------- -------- -------- ---- --- -- -
-                        // write to the student's file
-                        // void Student::addGPA(double classGrade)
-                        if (classGrade != -1) {
-                            if (MorS == "M") {
-                                m_Map[numID]->addGPA(classGrade);
-                            } else if (MorS == "S") {
-                                sI = m_Set.begin();
-                                for (int i = 0; i < m_Map.size(); i++) {
-                                    if ((*sI)->getID() == numID) {
-                                        (*sI)->addGPA(classGrade);
-                                        break;
-                                    } else {
-                                        sI++;
-                                    }
-                                }
-
-                            }
-                        }
-                        //-------- -------- -------- ---- --- -- -
-                    }
-                } else {
-                    fRead = false;
-                    return false;
-                }
-            } else {
-                fRead = false;
-                return false;
-            }
-        }
-    }
-    in_file.close();
-    //-----------------------------------------------------
-    return true;
 }
 
-string GPA::querySet(string fileName) {
+string GPA::querySet(string fileName)
+{
     cout << "GPA::querySet called with parameter: \n"+fileName <<endl<<endl;
     fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
     
@@ -384,7 +353,8 @@ string GPA::querySet(string fileName) {
     return sout.str();
 }
 
-string GPA::queryMap(string fileName) {
+string GPA::queryMap(string fileName)
+{
     cout << "GPA::queryMap called with parameter: \n"+fileName <<endl<<endl;
     fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
     
@@ -393,18 +363,23 @@ string GPA::queryMap(string fileName) {
     in_file_test.open(fileName);
     int check = in_file_test.peek();
     map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
-    if (check != EOF) {
+    if (check != EOF)
+    {
         ifstream in_file;
         in_file.open(fileName);
         bool fRead = true;
-        while (fRead) {
+        while (fRead)
+        {
             string fileLine = "";
             getline(in_file,fileLine);
-            if (fileLine != "") {
+            if (fileLine != "")
+            {
                 int numID = atoi(fileLine.c_str());
                 mI = m_Map.begin();
-                for (int i = 0; i < m_Map.size(); i++) {
-                    if (numID == mI->second->getID()) {
+                for (int i = 0; i < m_Map.size(); i++)
+                {
+                    if (numID == mI->second->getID())
+                    {
                         string map_GPA = mI->second->getGPA();
                         float Imap_GPA = atof(map_GPA.c_str());
                         sout.precision(20);
@@ -425,7 +400,7 @@ string GPA::queryMap(string fileName) {
 }
 
 void GPA::clear(){
-    cout << "GPA::clear called" <<endl<<endl;
+//    cout << "GPA::clear called" <<endl<<endl;
     m_Set.clear();
     m_Map.clear();
 }
@@ -435,7 +410,142 @@ void GPA::clear(){
 
 
 
-
+/* the guts of my initial importGrades function
+ 
+ cout << "GPA::importGrades called with parameter: \n"+fileName <<endl<<endl;
+ fileName = "/Users/Howl/Documents/BYU/CS/CS_235/lab7/Files/"+fileName;
+ // check if valid file
+ ifstream iFile_test;
+ iFile_test.open(fileName);
+ int ifileItest = iFile_test.peek();
+ if (ifileItest == EOF) {
+ return false;
+ }
+ 
+ map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
+ set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
+ float classGrade = -1;
+ int numID;
+ string fileLine;
+ string className;
+ string grade;
+ 
+ ifstream in_file;
+ in_file.open(fileName);
+ //-----------------------------------------------------
+ //read and parse file data
+ string MorS;
+ bool fRead = true;
+ bool writeEnable = false;
+ while (fRead) {
+ getline(in_file,fileLine);
+ numID = atoi(fileLine.c_str());
+ int check = in_file.peek();
+ if(check == EOF) {
+ if (writeEnable == true) {
+ fRead = false;
+ } else {
+ writeEnable = true;
+ in_file.clear();
+ in_file.seekg(0,ios::beg);
+ }
+ } else if (numID == 0) {
+ fRead = false;
+ return false;
+ } else {
+ //---------------------------------------------
+ //is a map or a set?
+ //check map
+ bool IDfound = false;
+ mI = m_Map.begin();
+ for (int i = 0; i < m_Set.size(); i++) {
+ if (mI->second->getID() == numID) {
+ MorS = "M";
+ IDfound = true;
+ } else {
+ mI++;
+ }
+ }
+ if (!IDfound) {
+ sI = m_Set.begin();
+ for (int i = 0; i < m_Map.size(); i++) {
+ if ((*sI)->getID() == numID) {
+ MorS = "S";
+ IDfound = true;
+ } else {
+ sI++;
+ }
+ }
+ }
+ //---------------------------------------------
+ getline(in_file, className);
+ if (className != "") {
+ getline(in_file, grade);
+ if (grade != "") {
+ if (writeEnable) {
+ if (grade == "A") {
+ classGrade = 4.0;
+ } else if (grade == "A-") {
+ classGrade = 3.7;
+ } else if (grade == "B+") {
+ classGrade = 3.4;
+ } else if (grade == "B") {
+ classGrade = 3.0;
+ } else if (grade == "B-") {
+ classGrade = 2.7;
+ } else if (grade == "C+") {
+ classGrade = 2.4;
+ } else if (grade == "C") {
+ classGrade = 2.0;
+ } else if (grade == "C-") {
+ classGrade = 1.7;
+ } else if (grade == "D+") {
+ classGrade = 1.4;
+ } else if (grade == "D") {
+ classGrade = 1.0;
+ } else if (grade == "D-") {
+ classGrade = 0.7;
+ } else if (grade == "E") {
+ classGrade = 0.0;
+ } else {
+ cout << "Incorrect grade read." << endl;
+ }
+ //-------- -------- -------- ---- --- -- -
+ // write to the student's file
+ // void Student::addGPA(double classGrade)
+ if (classGrade != -1) {
+ if (MorS == "M") {
+ m_Map[numID]->addGPA(classGrade);
+ } else if (MorS == "S") {
+ sI = m_Set.begin();
+ for (int i = 0; i < m_Map.size(); i++) {
+ if ((*sI)->getID() == numID) {
+ (*sI)->addGPA(classGrade);
+ break;
+ } else {
+ sI++;
+ }
+ }
+ 
+ }
+ }
+ //-------- -------- -------- ---- --- -- -
+ }
+ } else {
+ fRead = false;
+ return false;
+ }
+ } else {
+ fRead = false;
+ return false;
+ }
+ }
+ }
+ in_file.close();
+ //-----------------------------------------------------
+ return true;
+ 
+ */
 
 
 
