@@ -27,6 +27,10 @@ string Student::getName() {
 }
 
 string Student::getGPA() {
+    if (m_GPA == 0)
+    {
+        return "0.00";
+    }
     stringstream GPP;
     GPP << fixed << setprecision(2) << (m_totalGPA / m_numClasses);
     return GPP.str();

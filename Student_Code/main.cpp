@@ -49,12 +49,7 @@ int main(int argc, const char * argv[]) {
     getline(cin,four);
     G_obj->querySet(four);
     
-    cout << "quit (q)" << endl;
-    string q;
-    cin >> q;
-    if (q == "q") {
-        G_obj->clear();
-    }
+    G_obj->clear();
     return 0;
 }
 

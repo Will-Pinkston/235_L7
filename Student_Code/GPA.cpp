@@ -232,6 +232,7 @@ bool GPA::importGrades(string fileName)
         {
             in_file_test.close();
             ifstream in_file;
+            in_file.open(fileName);
             int num_ID;
             string className;
             string classGrade;
