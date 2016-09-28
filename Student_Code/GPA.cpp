@@ -367,8 +367,10 @@ string GPA::querySet(string fileName) {
                 sI = m_Set.begin();
                 for (int i = 0; i < m_Set.size(); i++) {
                     if (numID == (*sI)->getID()) {
+                        string set_GPA = (*sI)->getGPA();
+                        int Iset_GPA = atoi(set_GPA.c_str());
                         sout << (*sI)->getID() << " ";
-                        sout << fixed << setprecision(2) << (*sI)->getGPA() << " ";
+                        sout << fixed << setprecision(2) << Iset_GPA << " ";
                         sout << (*sI)->getName() << endl;
                         break;
                     }
