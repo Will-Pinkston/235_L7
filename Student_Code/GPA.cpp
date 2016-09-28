@@ -403,20 +403,32 @@ string GPA::queryMap(string fileName)
 
 void GPA::clear(){
     set<StudentInterface*,Comparator>::iterator sI = m_Set.begin();
+    
     for (int i = 0; i < m_Set.size(); i++)
     {
-        (*sI)->delete;
+        delete *sI;
         sI++;
     }
     m_Set.clear();
     
     map<unsigned long long int,StudentInterface*>::iterator mI = m_Map.begin();
-    for (int i = 0; i < m_Map.begin(); i++)
+   
+    while (m_Map.size() !=0)
     {
-        m_Map->delete;
+        if (m_Map.begin()->second != NULL)
+        {
+            delete m_Map.begin()->second;
+        }
+    }
+
+/*
+    for (int i = 0; i < m_Map.size(); i++)
+    {
+        delete[] (mI->second);
         mI++;
     }
     m_Map.clear();
+*/
 }
 
 
