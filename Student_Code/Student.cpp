@@ -28,7 +28,7 @@ string Student::getName() {
 
 string Student::getGPA() {
     stringstream GPP;
-    GPP << m_GPA;
+    GPP << fixed << setprecision(2) << (m_totalGPA / m_numClasses);
     return GPP.str();
 }
 
@@ -36,13 +36,7 @@ void Student::addGPA(double classGrade) {
     m_numClasses++;
     m_totalGPA += classGrade;
     m_GPA = m_totalGPA / m_numClasses;
-//    if (m_ID == 666537985) {
-        m_GPA = 2.53;
-    } else if (m_ID == 996857052) {
-//        m_GPA = 2.28;
-//    } else if (m_ID == 141013288) {
-//        m_GPA = 2.58;
-//    }
+
 }
 
 string Student::toString() {
