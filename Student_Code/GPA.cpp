@@ -403,10 +403,12 @@ string GPA::queryMap(string fileName) {
                 mI = m_Map.begin();
                 for (int i = 0; i < m_Map.size(); i++) {
                     if (numID == mI->second->getID()) {
+                        string map_GPA = mI->second->getGPA();
+                        int Imap_GPA = atoi(map_GPA.c_str());
                         sout.precision(20);
                         sout << mI->second->getID() << " ";
                         sout.precision(2);
-                        sout << fixed << mI->second->getGPA() << " ";
+                        sout << fixed << Imap_GPA << " ";
                         sout << mI->second->getName() << endl;
                         break;
                     }
